@@ -2,11 +2,13 @@ package br.com.microservico.loja.service;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.microservico.loja.dto.CompraDTO;
 import br.com.microservico.loja.dto.InfoFornecedorDTO;
 
+@Service
 public class CompraService {
 
 	public void ralizaCompra(CompraDTO compra) {
@@ -18,6 +20,8 @@ public class CompraService {
 				HttpMethod.GET, null, 
 				InfoFornecedorDTO.class
 		);
+		
+		System.out.println(exchange.getBody().getEndereco());
 
 	}
 
