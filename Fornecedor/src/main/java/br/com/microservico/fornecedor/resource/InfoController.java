@@ -1,4 +1,4 @@
-package br.com.microservico.fornecedor.controller;
+package br.com.microservico.fornecedor.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
