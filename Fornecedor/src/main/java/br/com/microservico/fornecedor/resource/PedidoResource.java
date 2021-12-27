@@ -3,6 +3,8 @@ package br.com.microservico.fornecedor.resource;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,12 +19,15 @@ import br.com.microservico.fornecedor.service.PedidoService;
 @RestController
 @RequestMapping("/pedido")
 public class PedidoResource {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(PedidoResource.class);
 
 	@Autowired
 	private PedidoService pedidoService;
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public Pedido realizaPedido(@RequestBody List<ItemDoPedidoDTO> produtos) {
+		LOG.info("pedido recebido");
 		return pedidoService.realizaPedido(produtos);
 	}
 	
