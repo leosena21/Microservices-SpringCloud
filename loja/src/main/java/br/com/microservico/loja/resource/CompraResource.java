@@ -18,7 +18,7 @@ public class CompraResource {
 	private CompraService compraService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Compra Compra(@RequestBody CompraDTO compra) {
+	public Compra Compra(@RequestBody final CompraDTO compra) {
 		return compraService.ralizaCompra(compra);
 	}
 

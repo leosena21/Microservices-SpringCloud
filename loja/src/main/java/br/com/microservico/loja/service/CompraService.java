@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import br.com.microservico.loja.client.FornecedorClient;
 import br.com.microservico.loja.dto.CompraDTO;
 import br.com.microservico.loja.dto.InfoFornecedorDTO;
@@ -18,6 +20,7 @@ public class CompraService {
 	private FornecedorClient fornecedorClient;
 	private static final Logger LOG = LoggerFactory.getLogger(CompraService.class);
 
+	@HystrixCommand(fallbackMethod = "realizaCompraFallback")
 	public Compra ralizaCompra(CompraDTO compra) {		
 		
 		LOG.info("buscando informações do fornecedor de {}", compra.getEndereco().getEstado());
@@ -33,5 +36,11 @@ public class CompraService {
 		compraSalva.setEnderecoDestino(compra.getEndereco().toString());
 		return compraSalva;
 	}
+	
+	public Compra realizaCompraFallback(final CompraDTO compra) {
+		Compra compraFallback = new Compra();
+		compraFallback.setEnderecoDestino(compra.getEndereco().toString());
 
+		return compraFallback;
+	}
 }
