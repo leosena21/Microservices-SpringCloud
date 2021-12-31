@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +20,9 @@ import lombok.Setter;
 public class PedidoItem {
 	
 	@Id
-	@Column(name = "id", columnDefinition = "BINARY(16)")
 	@GeneratedValue
+	@Type(type="org.hibernate.type.UUIDCharType")
+	@Column(name = "id", updatable = false, nullable = false)
 	private UUID id;
 	
 	private Integer quantidade;

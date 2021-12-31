@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Type;
+
 import br.com.microservico.fornecedor.model.enums.PedidoStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +27,9 @@ import lombok.Setter;
 public class Pedido {
 	
 	@Id
-	@Column(name = "id", columnDefinition = "BINARY(16)")
 	@GeneratedValue
+	@Type(type="org.hibernate.type.UUIDCharType")
+	@Column(name = "id", updatable = false, nullable = false)
 	private UUID id;
 	private Integer tempoDePreparo;
 	
